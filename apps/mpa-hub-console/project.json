@@ -16,7 +16,8 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/mpa-hub-console/src/favicon.ico",
-          "apps/mpa-hub-console/src/assets"
+          "apps/mpa-hub-console/src/assets",
+          "apps/mpa-hub-console/src/_redirects"
         ],
         "styles": ["apps/mpa-hub-console/src/styles.scss"],
         "scripts": []
