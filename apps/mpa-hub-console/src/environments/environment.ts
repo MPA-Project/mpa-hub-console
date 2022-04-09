@@ -17,7 +17,7 @@ export const environment = {
 
   FRONTEND_URL: 'https://myponyasia.com/',
 
-  APP_VERSION: '1.0-beta',
+  APP_VERSION: '1.0-dev',
 
   // Cookies
   COOKIE_SID: 'SID-MYPONYASIA',
