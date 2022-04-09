@@ -4,6 +4,28 @@
 
 export const environment = {
   production: false,
+
+  WEB_NAME: 'MPA Hub Console',
+
+  API_BASE_URL: 'http://127.0.0.1:5000/',
+  API_OAUTH: 'oauth/',
+  API_USER: 'v1/user/',
+
+  GOOGLE_RECAPTCHA_PUBLIC_KEY: '6LfAjaAeAAAAACPr7rpb3nQtLJP5uXHk6TzFKjfn',
+
+  ROUTE_BASE_URL: '/whatsittoya',
+
+  FRONTEND_URL: 'https://myponyasia.com/',
+
+  APP_VERSION: '1.0-beta',
+
+  // Cookies
+  COOKIE_SID: 'SID-MYPONYASIA',
+  COOKIE_SIDR: 'SIDR-MYPONYASIA',
+  COOKIE_DOMAIN: 'localhost',
+  COOKIE_SECURE: false,
+  COOKIE_HTTP_ONLY: false,
+
 };
 
 /*
