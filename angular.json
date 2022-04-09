@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "mpa-hub-console": "apps/mpa-hub-console",
+    "mpa-hub-console-e2e": "apps/mpa-hub-console-e2e"
+  }
+}

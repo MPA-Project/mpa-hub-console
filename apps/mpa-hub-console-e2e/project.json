@@ -1,0 +1,28 @@
+{
+  "root": "apps/mpa-hub-console-e2e",
+  "sourceRoot": "apps/mpa-hub-console-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/mpa-hub-console-e2e/cypress.json",
+        "devServerTarget": "mpa-hub-console:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "mpa-hub-console:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mpa-hub-console-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["mpa-hub-console"]
+}

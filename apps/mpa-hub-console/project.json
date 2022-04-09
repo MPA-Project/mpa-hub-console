@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/mpa-hub-console",
+  "sourceRoot": "apps/mpa-hub-console/src",
+  "prefix": "mpa-hub",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/mpa-hub-console",
+        "index": "apps/mpa-hub-console/src/index.html",
+        "main": "apps/mpa-hub-console/src/main.ts",
+        "polyfills": "apps/mpa-hub-console/src/polyfills.ts",
+        "tsConfig": "apps/mpa-hub-console/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/mpa-hub-console/src/favicon.ico",
+          "apps/mpa-hub-console/src/assets"
+        ],
+        "styles": ["apps/mpa-hub-console/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/mpa-hub-console/src/environments/environment.ts",
+              "with": "apps/mpa-hub-console/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "mpa-hub-console:build:production"
+        },
+        "development": {
+          "browserTarget": "mpa-hub-console:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "mpa-hub-console:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/mpa-hub-console/src/**/*.ts",
+          "apps/mpa-hub-console/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/mpa-hub-console"],
+      "options": {
+        "jestConfig": "apps/mpa-hub-console/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
