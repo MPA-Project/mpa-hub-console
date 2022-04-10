@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { CookieOptions, CookieService } from 'ngx-cookie';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { User } from '../models/User';
-import { UniversalResponse, RefreshToken, UserPermission, UserRole } from '../models';
+import { UniversalResponse, RefreshToken } from '../models';
 import { LsSetData } from '../utils/LocalStorage';
 
 @Injectable({

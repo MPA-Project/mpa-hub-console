@@ -11,11 +11,8 @@ import { CoreModule } from './shared/core.module';
 
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './shared/material.module';
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
