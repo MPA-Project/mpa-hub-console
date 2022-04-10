@@ -6,14 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './shared/core.module';
-import { ErrorComponent } from './core/components/error/error.component';
+
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from './shared/material.module';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, ErrorComponent],
+  declarations: [
+    AppComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,6 +26,7 @@ import { RouterModule } from '@angular/router';
     CookieModule.forRoot(),
     RouterModule,
     CoreModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

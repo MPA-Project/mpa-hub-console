@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { catchError, from, map, Observable, of } from 'rxjs';
+import { ALLOWED_ROLES } from '../constants';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -14,14 +15,24 @@ export class AuthGuard implements CanLoad {
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    return from(this.authService.checkingCredentials()).pipe(
-      map((response: boolean) => {
+    return from(this.authService.checkingRoles()).pipe(
+      map((response) => {
         if (response) {
-          return true;
-        } else {
-          this.router.navigate(['/error'], { queryParams: { reason: '401' } });
-          return false;
+          let allowed = false;
+          if (response.data && response.data?.length > 0) {
+            response.data?.forEach((role) => {
+              if (ALLOWED_ROLES.includes(role)) {
+                allowed = true;
+              }
+            });
+          }
+          if (!allowed) {
+            this.router.navigate(['/error'], { queryParams: { reason: '403' } });
+          }
+          return allowed;
         }
+        this.router.navigate(['/error'], { queryParams: { reason: '403' } });
+        return false;
       }),
       catchError((error) =>
         of(error).pipe(
@@ -31,6 +42,6 @@ export class AuthGuard implements CanLoad {
           }),
         ),
       ),
-    );;
+    );
   }
 }

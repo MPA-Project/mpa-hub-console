@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { CookieOptions, CookieService } from 'ngx-cookie';
 import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { User } from '../models/User';
-import { UniversalResponse, RefreshToken } from '../models';
+import { UniversalResponse, RefreshToken, UserPermission, UserRole } from '../models';
 import { LsSetData } from '../utils/LocalStorage';
 
 @Injectable({
@@ -53,11 +53,6 @@ export class AuthService {
     return false;
   }
 
-  async checkingPermission(route: string): Promise<boolean> {
-
-    return false;
-  }
-
   async regenerateAccessToken(refreshToken: string): Promise<string> {
     const getAccessToken: UniversalResponse<RefreshToken> = await lastValueFrom(this.requestAccessToken(refreshToken));
     if (getAccessToken != undefined && !getAccessToken.error && getAccessToken.data) {
@@ -73,6 +68,14 @@ export class AuthService {
 
   getRefreshToken(): string {
     return this.cookieService.get(this.cookieNameRefresh);
+  }
+
+  checkingRoles(): Observable<UniversalResponse<string[]>> {
+    return this.http.post<UniversalResponse<string[]>>(this.baseAuth + `roles`, null);
+  }
+
+  checkingPermissions(identity: string): Observable<UniversalResponse<string[]>> {
+    return this.http.post<UniversalResponse<string[]>>(this.baseAuth + `permissions?identity=${identity}`, null);
   }
 
   requestAccessToken(refreshToken: string): Observable<UniversalResponse<RefreshToken>> {

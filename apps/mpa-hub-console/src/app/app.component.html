@@ -1,1 +1,22 @@
-<router-outlet></router-outlet>
+
+
+<ng-container *ngIf="isVeryfyingAuth">
+  <div class="progress-bar-container">
+    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div class="verifyContainer">
+      <h2 class="mat-title">Verifying authentication</h2>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!isVeryfyingAuth">
+  <mpa-hub-main-navigation *ngIf="isSigned"
+    [dataTitle]="title"
+    [navList]="sidenavNavigation"
+    [isFetching]="loadingPage"
+    [isSidenavNavigationLoading]="isSidenavNavigationLoading"
+  ></mpa-hub-main-navigation>
+  <router-outlet *ngIf="!isSigned"></router-outlet>
+</ng-container>
