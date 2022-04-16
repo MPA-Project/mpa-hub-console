@@ -5,8 +5,22 @@
   <mat-sidenav #appDrawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>MPA Hub Console</mat-toolbar>
+      [opened]="(isHandset$ | async) === false && stateSidenav"
+      (opened)="setSidenav('open!')"
+      (closed)="setSidenav('close!')">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="center center">
+      <div>
+        <span>MPA Hub Console</span>
+      </div>
+      <span fxFlex></span>
+      <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="toggleSidenav(appDrawer)">
+          <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+        </button>
+    </mat-toolbar>
     <mat-nav-list>
       <ng-container *ngIf="isSidenavNavigationLoading">
         <div fxLayout="column" fxLayoutAlign="center center">
@@ -25,8 +39,8 @@
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
-          (click)="appDrawer.toggle()"
-          *ngIf="isHandset$ | async">
+          (click)="toggleSidenav(appDrawer)"
+          *ngIf="!appDrawer.opened">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span>{{ dataTitle }}</span>
@@ -34,7 +48,7 @@
         <a class="navLink avatar" [matMenuTriggerFor]="menu" style="max-width: 354px">
           <img src="/assets/images/default_avatar.png" title="Avatar" alt="Avatar">
         </a>
-        <mat-menu #menu="matMenu" class="avatarPanel">
+        <mat-menu #menu="matMenu" class="avatarPanel" style="max-width: 354px">
           <div class="avatarCardContainer">
             <div class="areaTop">
               <div class="pictureContainer">

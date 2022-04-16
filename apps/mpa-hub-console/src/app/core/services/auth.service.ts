@@ -75,7 +75,9 @@ export class AuthService {
   }
 
   checkingPermissions(identity: string): Observable<UniversalResponse<string[]>> {
-    return this.http.post<UniversalResponse<string[]>>(this.baseAuth + `permissions?identity=${identity}`, null);
+    return this.http.post<UniversalResponse<string[]>>(this.baseAuth + `permissions`, {
+      identity
+    });
   }
 
   requestAccessToken(refreshToken: string): Observable<UniversalResponse<RefreshToken>> {

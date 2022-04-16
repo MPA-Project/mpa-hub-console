@@ -10,6 +10,8 @@ export const environment = {
   API_BASE_URL: 'http://127.0.0.1:5000/',
   API_OAUTH: 'oauth/',
   API_USER: 'v1/user/',
+  API_CONSOLE: 'console/',
+  API_CONSOLE_ADMINISTRATOR: 'chino/',
 
   GOOGLE_RECAPTCHA_PUBLIC_KEY: '6LfAjaAeAAAAACPr7rpb3nQtLJP5uXHk6TzFKjfn',
 

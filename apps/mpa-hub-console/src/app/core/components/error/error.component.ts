@@ -1,5 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { NavigationSet } from '../../../state/navigation/navigation.action';
 
 @Component({
   selector: 'mpa-hub-core-error',
@@ -13,7 +15,13 @@ export class ErrorComponent implements OnInit, OnChanges {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-  ) { }
+    private store: Store,
+  ) {
+    if (activatedRoute?.snapshot?.routeConfig?.path === 'info')
+      this.store.dispatch(NavigationSet({payload: {hide: true}}));
+    else
+      this.store.dispatch(NavigationSet({payload: {hide: false}}));
+  }
 
   initReason(): void {
     const queryReason = this.activatedRoute.snapshot.queryParams?.['reason'];

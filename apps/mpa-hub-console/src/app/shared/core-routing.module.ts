@@ -16,6 +16,13 @@ const routes: Routes = [{
     }
   },
 
+  {
+    path: 'info', component: ErrorComponent,
+    data: {
+      title: 'Info',
+    }
+  },
+
 
   {
     path: 'whatsittoya',

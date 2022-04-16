@@ -11,6 +11,10 @@ import { CoreModule } from './shared/core.module';
 
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './shared/material.module';
+import { StoreModule } from '@ngrx/store';
+import { _NavigationReducer } from './state/navigation/navigation.reducer';
+import { NavigationKey } from './state/navigation/navigation.selector';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,6 +28,10 @@ import { MaterialModule } from './shared/material.module';
     RouterModule,
     CoreModule,
     MaterialModule,
+
+    StoreModule.forRoot({ 
+      [NavigationKey]: _NavigationReducer ,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

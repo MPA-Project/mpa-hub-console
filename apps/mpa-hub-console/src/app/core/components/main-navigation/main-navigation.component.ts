@@ -7,6 +7,8 @@ import { UniversalConfig } from '../../constants';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { LsGetData, LsSetData } from '../../utils/LocalStorage';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'mpa-hub-main-navigation',
@@ -14,8 +16,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./main-navigation.component.scss'],
 })
 export class MainNavigationComponent implements AfterViewInit {
-  
-  @ViewChild('appDrawer') appDrawer!: ElementRef;
+
+  @ViewChild('appDrawer') appDrawer!: ElementRef<MatDrawer>;
   @Input() dataTitle!: string;
   @Input() navList!: NavItem[];
   @Input() isFetching = false;
@@ -32,16 +34,34 @@ export class MainNavigationComponent implements AfterViewInit {
       shareReplay()
     );
 
+  stateSidenav = false;
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private navService: MainNavListService,
-    private matDialog: MatDialog,
-    private oauthServices: AuthService,
+    // private matDialog: MatDialog,
+    // private oauthServices: AuthService,
   ) {
-    // this.userUsername = this.oauthServices.currentUserValue.username;
+    const stateSidebar: string | null = LsGetData("isSidenavOpen");
+    if (stateSidebar === 'open!') {
+      this.stateSidenav = true;
+    } else if (stateSidebar === 'close!') {
+      this.stateSidenav = false;
+    }
+    console.log('this.stateSidenav', this.stateSidenav)
+  }
+
+  toggleSidenav(drawer: MatDrawer): void {
+    drawer?.toggle();
+    // LsSetData("isSidenavOpen", drawer?.opened);
+  }
+
+  setSidenav(state: string): void {
+    LsSetData("isSidenavOpen", state);
   }
 
   ngAfterViewInit(): void {
+    console.log();
     this.navService.appDrawer = this.appDrawer;
   }
 }

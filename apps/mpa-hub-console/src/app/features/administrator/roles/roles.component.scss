@@ -1,0 +1,7 @@
+@import '/src/styles/dataTableMixin';
+
+@include mat-table-columns((no: (width: 10%),
+    name: (width: 55%, padding-left: 8px),
+    level: (width: 15%, padding-left: 8px),
+    userCount: (width: 15%, padding-left: 8px),
+    actions: (width: 5%, padding-left: 8px)));

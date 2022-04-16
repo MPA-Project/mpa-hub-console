@@ -6,6 +6,8 @@ export const environment = {
   API_BASE_URL: 'https://api-hub.myponyasia.com/',
   API_OAUTH: 'oauth/',
   API_USER: 'v1/user/',
+  API_CONSOLE: 'console/',
+  API_CONSOLE_ADMINISTRATOR: 'chino/',
 
   GOOGLE_RECAPTCHA_PUBLIC_KEY: '6LfAjaAeAAAAACPr7rpb3nQtLJP5uXHk6TzFKjfn',
 

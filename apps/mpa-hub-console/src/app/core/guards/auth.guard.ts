@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
 import { catchError, from, map, Observable, of } from 'rxjs';
-import { NavigationSet } from '../../state/navigation/navigation.action';
 import { ALLOWED_ROLES } from '../constants';
 import { AuthService } from '../services/auth.service';
 
@@ -50,6 +49,6 @@ export class AuthGuard implements CanLoad {
   }
 
   navigateError(code: string): void {
-    this.router.navigate(['/error'], { queryParams: { reason: code } });
+    this.router.navigate(['/info'], { queryParams: { reason: code } });
   }
 }

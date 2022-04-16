@@ -19,7 +19,7 @@ export class PermissionGuard implements CanActivate {
         return true;
       }
 
-    return from(this.authService.checkingPermissions(getPage)).pipe(
+      return from(this.authService.checkingPermissions(getPage)).pipe(
         map((response) => {
           if (response) {
             return true;

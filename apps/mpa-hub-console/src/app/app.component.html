@@ -12,11 +12,16 @@
 </ng-container>
 
 <ng-container *ngIf="!isVeryfyingAuth">
-  <mpa-hub-main-navigation *ngIf="isSigned"
-    [dataTitle]="title"
-    [navList]="sidenavNavigation"
-    [isFetching]="loadingPage"
-    [isSidenavNavigationLoading]="isSidenavNavigationLoading"
-  ></mpa-hub-main-navigation>
-  <router-outlet *ngIf="!isSigned"></router-outlet>
+  <ng-container *ngIf="navigationEnable">
+    <mpa-hub-main-navigation *ngIf="isSigned"
+      [dataTitle]="title"
+      [navList]="sidenavNavigation"
+      [isFetching]="loadingPage"
+      [isSidenavNavigationLoading]="isSidenavNavigationLoading"
+    ></mpa-hub-main-navigation>
+    <router-outlet *ngIf="!isSigned"></router-outlet>
+  </ng-container>
+  <ng-container *ngIf="!navigationEnable">
+    <router-outlet></router-outlet>
+  </ng-container>
 </ng-container>

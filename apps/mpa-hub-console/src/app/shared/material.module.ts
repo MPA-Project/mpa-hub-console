@@ -11,6 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -28,6 +35,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatMenuModule,
     MatListModule,
     MatButtonModule,
+    MatTabsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatInputModule,
   ],
   exports: [
     LayoutModule,
@@ -40,6 +54,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatMenuModule,
     MatListModule,
     MatButtonModule,
+    MatTabsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatInputModule,
   ],
 })
 export class MaterialModule { }

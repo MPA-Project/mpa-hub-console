@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart } from '@angular/router';
-import { catchError, filter, from, map, mergeMap, of, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { catchError, filter, from, map, mergeMap, Observable, of, Subscription } from 'rxjs';
 import { environment } from '../environments/environment';
 import { NavItem } from './core/models';
 import { AuthService } from './core/services/auth.service';
+import { NavigationEntity } from './state/navigation/navigation.model';
+import { selectNavigationSelector } from './state/navigation/navigation.selector';
 
 @Component({
   selector: 'mpa-hub-root',
@@ -21,18 +24,68 @@ export class AppComponent implements OnInit, OnDestroy {
 
   baseUrl = environment.ROUTE_BASE_URL;
 
-  sidenavNavigation: NavItem[] = [];
+  sidenavNavigation: NavItem[] = [
+    {
+      displayName: 'Dashboard',
+      iconName: 'dashboard',
+      route: '/whatsittoya',
+      isDashboard: true,
+    },
+    {
+      displayName: 'Administrator',
+      iconName: 'dashboard',
+      route: '/whatsittoya/chino',
+      routeDisabled: true,
+      children: [
+        {
+          displayName: 'Manage',
+          iconName: 'dashboard',
+          route: '/whatsittoya/chino/manage',
+          routeDisabled: true,
+          children: [
+            {
+              displayName: 'Roles',
+              iconName: 'dashboard',
+              route: '/whatsittoya/chino/manage/roles',
+            },
+            {
+              displayName: 'Permission',
+              iconName: 'dashboard',
+              route: '/whatsittoya/chino/manage/permissions',
+            },
+            {
+              displayName: 'Users',
+              iconName: 'dashboard',
+              route: '/whatsittoya/chino/manage/users',
+            },
+          ]
+        },
+        {
+          displayName: 'Settings',
+          iconName: 'dashboard',
+          route: '/whatsittoya/chino/settings',
+        },
+      ],
+    },
+  ];
   isSidenavNavigationLoading = false;
+  navigationEnable = true;
 
   routeEventLoading!: Subscription;
   routeEventData!: Subscription;
+
+  navigation$!: Observable<NavigationEntity>;
+  navigationSubscription!: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title,
+    private store: Store,
     ) {
+      this.navigation$ = store.select(selectNavigationSelector);
+
       this.routeEventLoading = this.router.events.subscribe((event) => {
         switch (true) {
           case event instanceof NavigationStart: {
@@ -57,19 +110,23 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.navigationSubscription = this.navigation$.subscribe((navigation) => {
+      this.navigationEnable = !navigation.hide;
+    });
+
     from(this.authService.checkingCredentials()).pipe(
       map((response: boolean) => {
         if (response) {
           return true;
         } else {
-          this.router.navigate(['/error'], { queryParams: { reason: '401' } });
+          this.router.navigate(['/info'], { queryParams: { reason: '401' } });
           return false;
         }
       }),
       catchError((error) =>
         of(error).pipe(
           map(() => {
-            this.router.navigate(['/error'], { queryParams: { reason: '403' } });
+            this.router.navigate(['/info'], { queryParams: { reason: '403' } });
             return false;
           }),
         ),
@@ -106,6 +163,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (this.routeEventData) {
       this.routeEventData.unsubscribe();
+    }
+
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
     }
   }
 }

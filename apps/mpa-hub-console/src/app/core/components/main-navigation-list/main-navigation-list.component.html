@@ -1,1 +1,38 @@
-<p>main-navigation-list works!</p>
+<div *ngIf="!item.children || (item.children && item.children.length === 0)" fxLayout="column">
+  <a (click)="onItemSelected(item)" routerLink="{{ item.route }}"
+    [ngClass]="{'selected': (item.route ? router.isActive(item.route, true): false) || isSelected, 'expanded': expanded}"
+    [ngStyle]="{'padding-left': (depth * 12) + 'px'}"
+    title="{{ item.displayName }}"
+    class="vertical-menu-item">
+    <span>{{ item.displayName }}</span>
+  </a>
+</div>
+<div *ngIf="item.children && item.children.length > 0" fxLayout="column">
+  <a *ngIf="!item.routeDisabled" (click)="onItemSelected(item)" routerLink="{{ item.route }}"
+    [ngClass]="{'selected': (item.route ? router.isActive(item.route, true): false) || isSelected, 'expanded': expanded}"
+    [ngStyle]="{'padding-left': (depth * 12) + 'px'}"
+    title="{{ item.displayName }}"
+    class="vertical-menu-item">
+    <span>{{ item.displayName }}</span>
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+      expand_more
+    </mat-icon>
+  </a>
+  
+  <button *ngIf="item.routeDisabled" type="button" (click)="onItemSelected(item)"
+    [ngClass]="{'selected': (item.route ? router.isActive(item.route, true): false) || isSelected, 'expanded': expanded}"
+    [ngStyle]="{'padding-left': (depth * 12) + 'px'}"
+    title="{{ item.displayName }}"
+    class="vertical-menu-item">
+    <span>{{ item.displayName }}</span>
+    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+      expand_more
+    </mat-icon>
+  </button>
+  
+  <div class="heading-children" [ngClass]="{'selected': (item.route ? router.isActive(item.route, true): false) || isSelected, 'expanded': expanded, 'collapsed': !expanded}">
+    <mpa-hub-main-navigation-list *ngFor="let child of item.children" [item]="child" [depth]=" depth + 1"></mpa-hub-main-navigation-list>
+  </div>
+</div>
+
+<!-- <mat-icon class="routeIcon">{{item.iconName}}</mat-icon> -->

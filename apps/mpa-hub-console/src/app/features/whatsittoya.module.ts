@@ -8,7 +8,7 @@ import { WhatsittoyaRoutingModule } from './whatsittoya-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    WhatsittoyaRoutingModule
+    WhatsittoyaRoutingModule,
   ]
 })
 export class WhatsittoyaModule { }
