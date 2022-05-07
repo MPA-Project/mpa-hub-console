@@ -5,5 +5,12 @@
       <h1 class="no-toc">{{ reason }}</h1>
       <p>{{ reasonDesc }}</p>
     </div>
+    <ng-container *ngIf="isLoginRequired">
+      <div fxFlex>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <a mat-button [href]="constructSigninUrl()">Click here to login</a>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>

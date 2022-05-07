@@ -13,11 +13,15 @@ export const environment = {
   API_CONSOLE: 'console/',
   API_CONSOLE_ADMINISTRATOR: 'chino/',
 
+  CONSOLE_URL: 'http://localhost:4200/',
+
   GOOGLE_RECAPTCHA_PUBLIC_KEY: '6LfAjaAeAAAAACPr7rpb3nQtLJP5uXHk6TzFKjfn',
 
   ROUTE_BASE_URL: '/whatsittoya',
 
   FRONTEND_URL: 'https://myponyasia.com/',
+
+  OAUTH_URL: 'https://oauth.myponyasia.com/',
 
   APP_VERSION: '1.0-dev',
 

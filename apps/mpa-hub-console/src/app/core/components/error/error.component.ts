@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { environment } from '../../../../environments/environment';
 import { NavigationSet } from '../../../state/navigation/navigation.action';
 
 @Component({
@@ -12,6 +13,7 @@ export class ErrorComponent implements OnInit, OnChanges {
   reason = 'Something went wrong';
   reasonDesc = 'We\'re sorry. Please try again leter.';
   title = 'Something Went Wrong';
+  isLoginRequired = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,7 +25,12 @@ export class ErrorComponent implements OnInit, OnChanges {
       this.store.dispatch(NavigationSet({payload: {hide: false}}));
   }
 
+  constructSigninUrl(): string {
+    return `${environment.OAUTH_URL}?action=signin&redirect=${environment.CONSOLE_URL}`;
+  }
+
   initReason(): void {
+    this.isLoginRequired = false;
     const queryReason = this.activatedRoute.snapshot.queryParams?.['reason'];
     if (queryReason) {
       switch (queryReason) {
@@ -33,6 +40,7 @@ export class ErrorComponent implements OnInit, OnChanges {
           this.title = 'Page not found';
           break;
         case '401':
+          this.isLoginRequired = true;
           this.reason = 'Login Required';
           this.reasonDesc = 'We\'re sorry. The resource you are looking need authentication credentials.';
           this.title = 'Unauthorized';
