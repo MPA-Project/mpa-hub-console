@@ -62,11 +62,11 @@ export class AuthService {
     return '';
   }
 
-  getAccessToken(): string {
+  getAccessToken(): string | undefined {
     return this.cookieService.get(this.cookieNameAccess);
   }
 
-  getRefreshToken(): string {
+  getRefreshToken(): string | undefined {
     return this.cookieService.get(this.cookieNameRefresh);
   }
 
