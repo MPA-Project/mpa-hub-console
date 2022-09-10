@@ -21,7 +21,7 @@ export const environment = {
 
   FRONTEND_URL: 'https://myponyasia.com/',
 
-  OAUTH_URL: 'https://oauth.myponyasia.com/',
+  OAUTH_URL: 'http://localhost:8080/',
 
   APP_VERSION: '1.0-dev',
 
@@ -31,6 +31,10 @@ export const environment = {
   COOKIE_DOMAIN: 'localhost',
   COOKIE_SECURE: false,
   COOKIE_HTTP_ONLY: false,
+
+  // Pagination Config
+  PAGINATION_PAGE_SIZE: 10,
+  PAGINATION_PAGE_LIST: [10, 25],
 
 };
 

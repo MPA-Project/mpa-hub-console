@@ -80,7 +80,7 @@
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
               </div>
-              <mat-paginator class="borderBottom" [pageSizeOptions]="[10, 25, 50]" [length]="resultsLength"
+              <mat-paginator class="borderBottom" [pageSizeOptions]="pageSizeList" [length]="resultsLength"
                 [pageSize]="pageSize" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
             </mat-card-content>
           </mat-card>

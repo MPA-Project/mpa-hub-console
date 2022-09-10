@@ -27,4 +27,8 @@ export const environment = {
   COOKIE_DOMAIN: '.myponyasia.com',
   COOKIE_SECURE: false,
   COOKIE_HTTP_ONLY: false,
+
+  // Pagination Config
+  PAGINATION_PAGE_SIZE: 10,
+  PAGINATION_PAGE_LIST: [10, 25],
 };

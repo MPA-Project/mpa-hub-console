@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'apps/mpa-hub-console/src/environments/environment';
 import { Subscription, debounceTime, distinctUntilChanged, merge, startWith, switchMap, map, catchError, of } from 'rxjs';
 import { PermissionResponse, UniversalPaginationParameters } from '../../../core/models';
 import { LoadingAnimation, queryParamBuilder } from '../../../core/utils';
@@ -26,8 +27,9 @@ export class PermissionsComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoadingResults = true;
   isLoadingAction = false;
 
-  pageSize = 10;
+  pageSize = environment.PAGINATION_PAGE_SIZE;
   pageIndex = 0;
+  pageSizeList = environment.PAGINATION_PAGE_LIST;
   sortBy = 'no';
   sortByDirection: SortDirection = 'asc';
   contentSearchActive = false;
@@ -109,8 +111,10 @@ export class PermissionsComponent implements OnInit, AfterViewInit, OnDestroy {
             orderBy: this.sort.active,
             orderByDirection: this.sort.direction,
           };
-          if (this.searchControl.value.toString().length > 0) {
+          if (this.searchControl.value.toString().length > 2) {
             params.query = this.searchControl.value;
+          } else {
+            params.query = "";
           }
 
           return this.permissionsService.getList(params);
