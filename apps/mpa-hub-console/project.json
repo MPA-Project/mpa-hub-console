@@ -1,6 +1,6 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/mpa-hub-console",
   "sourceRoot": "apps/mpa-hub-console/src",
   "prefix": "mpa-hub",
   "targets": {
@@ -86,7 +86,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/mpa-hub-console"],
       "options": {
-        "jestConfig": "apps/mpa-hub-console/jest.config.js",
+        "jestConfig": "apps/mpa-hub-console/jest.config.ts",
         "passWithNoTests": true
       }
     }

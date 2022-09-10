@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort, SortDirection } from '@angular/material/sort';
@@ -32,7 +32,7 @@ export class RolesComponent implements OnInit, AfterViewInit, OnDestroy {
   sortByDirection: SortDirection = 'asc';
   contentSearchActive = false;
   searchSubscription!: Subscription;
-  searchControl = new FormControl('');
+  searchControl = new UntypedFormControl('');
 
   displayedColumns: string[] = ['no', 'name', 'level', 'userCount'];
   dataSource: RolesResponse[] = [];
