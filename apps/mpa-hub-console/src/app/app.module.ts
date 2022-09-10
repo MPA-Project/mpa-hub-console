@@ -30,7 +30,7 @@ import { NavigationKey } from './state/navigation/navigation.selector';
     MaterialModule,
 
     StoreModule.forRoot({ 
-      [NavigationKey]: _NavigationReducer ,
+      [NavigationKey]: _NavigationReducer,
     }),
   ],
   providers: [],
