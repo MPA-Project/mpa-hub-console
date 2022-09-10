@@ -113,7 +113,7 @@ export class RolesComponent implements OnInit, AfterViewInit, OnDestroy {
             params.query = this.searchControl.value;
           }
 
-          return this.rolesService.getRoles(params);
+          return this.rolesService.getList(params);
         }),
         map(data => {
           this.isLoadingResults = false;

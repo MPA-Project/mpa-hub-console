@@ -18,7 +18,7 @@ export class RolesService {
     private http: HttpClient,
   ) { }
 
-  getRoles({pageSize, orderBy, orderByDirection, pageIndex, query}: UniversalPaginationParameters): Observable<UniversalResponse<UniversalPaginationData<RolesResponse[]>>> {
+  getList({pageSize, orderBy, orderByDirection, pageIndex, query}: UniversalPaginationParameters): Observable<UniversalResponse<UniversalPaginationData<RolesResponse[]>>> {
     const queryParams = httpQueryParamsBuilder({
       pageSize,
       pageIndex,
